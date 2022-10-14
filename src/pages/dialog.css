@@ -1,0 +1,29 @@
+.styledOverlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  /* para -> top,bottom,left,right = 0 */
+  inset: 0;
+}
+
+.styledTitle {
+  font-weight: 900;
+  font-size: 3.2rem;
+  line-height: 160%;
+  letter-spacing: -0.69px;
+}
+
+.styledContent {
+  background-color: rgba(10, 40, 69, 0.786);
+  border-radius: 0.8rem;
+  width: 48.8rem;
+  position: fixed;
+  padding-block: 3.2rem;
+  padding-inline: 4rem;
+  color: white;
+  box-shadow: 0px 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+
+  /* para -> centralizar o modal na tela */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
