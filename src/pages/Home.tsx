@@ -1,44 +1,44 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { useState } from 'react'
+
+import { useContext, useEffect, useState } from 'react'
 
 import Calendar from 'react-calendar'
 import { Title } from '../components/Title'
 import { Button } from '../components/Button'
-import { Tarefa } from '../components/Tarefa'
 import { ModalNovaTarefa } from '../components/ModalNovaTarefa'
 
 import './calendar.css'
 import './dialog.css'
 
+import { TarefasContext } from '../contexts/TarefasContext'
+import { MessageAction } from '../components/MessageAction'
+import { ListTarefas } from '../components/ListTarefas'
 export default function Home() {
   const [value, onChange] = useState(new Date())
 
+  const { updateDateSelect } = useContext(TarefasContext)
+
+  useEffect(() => {
+    updateDateSelect(
+      `${value.getDate()}-${value.getMonth() + 1}-${value.getFullYear()}`
+    )
+  }, [value])
+
   return (
-    <div className="flex justify-center bg-gray-200">
-      <div className="flex flex-col-reverse w-screen h-screen justify-center bg-#EEE gap-10 p-16 max-w-5xl">
+    <div className="flex flex-col justify-center items-center bg-gray-200">
+      <MessageAction />
+
+      <div className="flex flex-col-reverse w-screen min-h-screen justify-end bg-#EEE gap-10 p-16 max-w-5xl">
         <div className="flex flex-col gap-6 bg-gray-100 p-6 rounded-xl shadow-md">
           <Title />
-          <div className="flex flex-col gap-4">
-            <Tarefa
-              title={'Leslie Alexander'}
-              description={'Reunião para resolver feature do front-end'}
-              date={'15 Outubro, 2022 às 17:00'}
-              duration={'50 minutos'}
-              location={'Discord'}
-            />
-            <Tarefa
-              title={'Leslie Alexander'}
-              description={'Reunião para resolver feature do front-end'}
-              date={'15 Outubro, 2022 às 17:00'}
-              duration={'50 minutos'}
-              location={'Discord'}
-            />
-          </div>
+
+          <ListTarefas />
         </div>
 
         <Dialog.Root>
           <div className="flex flex-col gap-6">
             <Calendar onChange={onChange} value={value} locale={'pt-BR'} />
+
             <Button>Adicionar Tarefa</Button>
           </div>
 
