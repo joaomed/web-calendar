@@ -1,12 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { useEffect } from 'react'
 import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { MdOutlineCancel } from 'react-icons/md'
-/* 
-import { useListarTarefas } from "../../data/hooks/tarefas/useListarTarefas"; */
 
 import { useCriarTarefa } from '../../data/hooks/tarefas/useCriarTarefa'
-import { Button } from '../Button'
 
 interface ModalNovaTarefaProps {
   dateCurrent: Date
@@ -18,8 +14,6 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
     setTitle,
     description,
     setDescription,
-    date,
-    setDate,
     hourStart,
     setHourStart,
     hourEnd,
@@ -38,20 +32,12 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
     'Maio',
     'Junho',
     'Julho',
-    'Augosto',
+    'Agosto',
     'Setembro',
     'Outubro',
     'Novembro',
     'Dezembro'
   ]
-
-  useEffect(() => {
-    setDate(
-      `${dateCurrent.getDate()}-${
-        dateCurrent.getMonth() + 1
-      }-${dateCurrent.getFullYear()}`
-    )
-  }, [dateCurrent])
 
   /*   const { tarefas } = useListarTarefas();*/
 
@@ -76,6 +62,7 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           className="rounded-lg bg-gray-300 px-6 py-5 h-20 text-lg text-black placeholder:text-gray-700"
+          required
         />
       </div>
 
@@ -88,6 +75,7 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           value={description}
           onChange={e => setDescription(e.target.value)}
           className="rounded-lg bg-gray-300 px-6 py-5 h-20 text-lg text-black placeholder:text-gray-700"
+          required
         />
       </div>
 
@@ -104,6 +92,7 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           value={hourStart}
           onChange={e => setHourStart(e.target.value)}
           className="rounded-lg bg-gray-300 px-6 py-5 h-20 text-lg text-black placeholder:text-gray-700"
+          required
         />
         <label htmlFor="hourEnd" className="font-bold text-lg">
           Até
@@ -114,6 +103,7 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           value={hourEnd}
           onChange={e => setHourEnd(e.target.value)}
           className="rounded-lg bg-gray-300 px-6 py-5 h-20 text-lg text-black placeholder:text-gray-700"
+          required
         />
       </div>
 
@@ -126,6 +116,7 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           value={location}
           onChange={e => setLocation(e.target.value)}
           className="rounded-lg bg-gray-300 px-6 py-5 h-20 text-lg text-black placeholder:text-gray-700"
+          required
         />
       </div>
 
@@ -137,10 +128,16 @@ export function ModalNovaTarefa({ dateCurrent }: ModalNovaTarefaProps) {
           <MdOutlineCancel size={24} />
           Cancelar
         </Dialog.Close>
-        <Button onClick={cadastrarTarefa}>
+
+        <button
+          type="submit"
+          onClick={cadastrarTarefa}
+          className="bg-blue-500 hover:bg-blue-700 duration-300 text-base flex gap-2 justify-center font-bold rounded-2xl p-4"
+        >
           <AiOutlineCheckCircle size={24} />
           Cadastrar Tarefa
-        </Button>
+        </button>
+
         {message}
       </footer>
     </form>
