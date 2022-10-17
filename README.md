@@ -36,13 +36,26 @@ Este é um projeto [React.JS](https://pt-br.reactjs.org/) com [`npm create vite@
 
 ## Getting Started
 
-First, run the development server:
+Primeiramente, inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
 # or
 yarn dev
 ```
+
+Abra [http://localhost:3000](http://localhost:3000) com o navegador para ver o resultado.
+
+Em segundo, inicie a aplicação front-end:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+Um link será descrito para que seja redirecionado para a aplicação.
+
+Para mais informações, acesse: [Getting Started](https://vitejs.dev/guide/)
 
 ## Deploy in Vercel
 
