@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ApiService } from '../../services/ApiServices'
 import { AxiosError } from 'axios'
+import { TarefasContext } from '../../../contexts/TarefasContext'
 
 export function useCriarTarefa() {
   const [title, setTitle] = useState('')
@@ -11,26 +12,31 @@ export function useCriarTarefa() {
   const [location, setLocation] = useState('')
   const [message, setMessage] = useState('')
 
+  const { dateSelect } = useContext(TarefasContext)
+  const { updateMessage } = useContext(TarefasContext)
+
   useEffect(() => {
-    console.log(date)
-  }, [date])
+    setDate(dateSelect)
+  }, [dateSelect])
 
   function cadastrarTarefa() {
-    ApiService.post(`/${date}/`, {
-      title,
-      description,
-      date,
-      hourStart,
-      hourEnd,
-      location
-    })
-      .then(() => {
-        clearForm()
-        setMessage('Tarefa Cadastrada com sucesso!')
+    if (dateSelect != '') {
+      ApiService.post(`/tarefas`, {
+        title,
+        description,
+        date,
+        hourStart,
+        hourEnd,
+        location
       })
-      .catch((error: AxiosError) => {
-        console.log(error)
-      })
+        .then(() => {
+          clearForm()
+        })
+        .catch((error: AxiosError) => {
+          console.log(error)
+        })
+    }
+    updateMessage('Tarefa Cadastrada!')
   }
 
   function clearForm() {
